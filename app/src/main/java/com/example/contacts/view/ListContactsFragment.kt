@@ -14,11 +14,13 @@ import com.example.contacts.R
 import com.example.contacts.adapters.ListContactRecycleViewAdapter
 import com.example.contacts.databinding.FragmentListContactsBinding
 import com.example.contacts.model.ContactModel
+import com.example.contacts.viewModel.ListContactsViewModel
 
 class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
     lateinit var recyclerView: RecyclerView
     lateinit var binding: FragmentListContactsBinding
-    var contacts = arrayListOf<ContactModel>()
+    var contacts = listOf<ContactModel>()
+    val listContactsViewModel = ListContactsViewModel()
     private val _toCrud = MutableLiveData<Boolean>()
     val toCrud : LiveData<Boolean>
         get() = _toCrud
@@ -29,28 +31,12 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListContactsBinding.inflate(layoutInflater)
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        contacts.add(ContactModel("a","bbbbb", null, null,null))
-        setupRecycler()
+         listContactsViewModel.contactModels.observe(viewLifecycleOwner){
+            contacts = it
+             setupRecycler()
+        }
+        listContactsViewModel.getList(binding.root.context)
+
         binding.btnAddContat.setOnClickListener({
             _toCrud.value = true
         })

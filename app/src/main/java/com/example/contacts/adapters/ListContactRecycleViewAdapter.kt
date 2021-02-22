@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.contacts.R
 import com.example.contacts.model.ContactModel
 
-class ListContactRecycleViewAdapter(var contacts: ArrayList<ContactModel>): RecyclerView.Adapter<ListContactRecycleViewAdapter.ViewHolder>() {
+class ListContactRecycleViewAdapter(var contacts: List<ContactModel>): RecyclerView.Adapter<ListContactRecycleViewAdapter.ViewHolder>() {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val fName: TextView

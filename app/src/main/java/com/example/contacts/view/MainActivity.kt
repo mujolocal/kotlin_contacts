@@ -6,6 +6,11 @@ import androidx.fragment.app.commit
 import com.example.contacts.R
 import com.example.contacts.databinding.ActivityMainBinding
 
+/**
+ * how to go back from one fragment to another
+ *
+ */
+
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     var listContactsFragment =  ListContactsFragment()
