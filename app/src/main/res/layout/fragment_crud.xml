@@ -45,6 +45,12 @@
         android:hint="email"
         android:id="@+id/crud_email_iv"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/commit_btn"
+        android:text="Creat Contact"/>
+
 
 
 
