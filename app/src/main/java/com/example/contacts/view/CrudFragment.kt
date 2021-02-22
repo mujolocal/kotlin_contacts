@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 
 class CrudFragment: Fragment(R.layout.fragment_crud) {
     private val TAG = "CrudFragment"
+    private val CONTACT_KEY = "contact_key"
     lateinit var binding: FragmentCrudBinding
     lateinit var contactModel: ContactModel
     val crudViewModel = CrudViewModel()
@@ -27,6 +28,20 @@ class CrudFragment: Fragment(R.layout.fragment_crud) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCrudBinding.inflate(layoutInflater)
+
+        val savedContactModel = arguments?.getSerializable(CONTACT_KEY) as ContactModel?
+        Log.d(TAG, "onCreateView: ")
+        if (savedContactModel != null){
+            binding.crudFnameIv.setText( savedContactModel.fName )
+            binding.crudLnameIv.setText(savedContactModel.lName)
+            binding.crudStreetIv.setText(savedContactModel.ADDRESS)
+            binding.crudPhoneIv.setText(savedContactModel.phone)
+            binding.crudEmailIv.setText(savedContactModel.email)
+            binding.commitBtn.text = "Update Contact"
+            
+        }
+
+
         binding.commitBtn.setOnClickListener {
             contactModel = ContactModel(
                 binding.crudFnameIv.text.toString(),
@@ -35,9 +50,13 @@ class CrudFragment: Fragment(R.layout.fragment_crud) {
                 binding.crudPhoneIv.text.toString(),
                 binding.crudEmailIv.text.toString()
             )
-            crudViewModel.insertInto(binding.root.context,contactModel)
-            Log.d(TAG, "onCreateView: $contactModel ")
-
+            if (savedContactModel != null){
+                crudViewModel.update(binding.root.context,contactModel)
+                Log.d(TAG, "onCreateView: updated")
+            }else {
+                crudViewModel.insertInto(binding.root.context, contactModel)
+                Log.d(TAG, "onCreateView: $contactModel ")
+            }
         }
 
 

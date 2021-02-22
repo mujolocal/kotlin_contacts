@@ -17,4 +17,10 @@ class CrudViewModel : ViewModel() {
             contactDAO?.addContact(contactModel)
         }
     }
+    fun update(context: Context, contactModel: ContactModel){
+        viewModelScope.launch(Dispatchers.IO){
+            val contactDAO:ContactDAO? = ContactDB.getDatabase(context)?.contactDao()
+            contactDAO?.updateContact(contactModel)
+        }
+    }
 }
