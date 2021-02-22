@@ -14,6 +14,7 @@ import com.example.contacts.R
 import com.example.contacts.adapters.ListContactRecycleViewAdapter
 import com.example.contacts.databinding.FragmentListContactsBinding
 import com.example.contacts.model.ContactModel
+import com.example.contacts.model.PagePackage
 import com.example.contacts.viewModel.ListContactsViewModel
 
 class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
@@ -21,8 +22,8 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
     lateinit var binding: FragmentListContactsBinding
     var contacts = listOf<ContactModel>()
     val listContactsViewModel = ListContactsViewModel()
-    private val _toCrud = MutableLiveData<Boolean>()
-    val toCrud : LiveData<Boolean>
+    private val _toCrud = MutableLiveData<PagePackage>()
+    val toCrud : LiveData<PagePackage>
         get() = _toCrud
 
     override fun onCreateView(
@@ -37,9 +38,10 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
         }
         listContactsViewModel.getList(binding.root.context)
 
-        binding.btnAddContat.setOnClickListener({
-            _toCrud.value = true
-        })
+        binding.btnAddContat.setOnClickListener {
+            _toCrud.value = PagePackage(true,null)
+
+        }
 
 
         return binding.root

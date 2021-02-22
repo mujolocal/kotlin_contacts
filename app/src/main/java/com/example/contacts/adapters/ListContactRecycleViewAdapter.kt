@@ -1,5 +1,7 @@
 package com.example.contacts.adapters
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +11,7 @@ import com.example.contacts.R
 import com.example.contacts.model.ContactModel
 
 class ListContactRecycleViewAdapter(var contacts: List<ContactModel>): RecyclerView.Adapter<ListContactRecycleViewAdapter.ViewHolder>() {
-
+    private  val TAG = "ListContactRecycleViewA"
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val fName: TextView
         val lName: TextView
@@ -33,6 +35,10 @@ class ListContactRecycleViewAdapter(var contacts: List<ContactModel>): RecyclerV
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.lName.text = contacts[position].lName
         holder.fName.text = contacts[position].fName
+        holder.itemView.setOnClickListener({
+            Log.d(TAG, "onBindViewHolder: ${contacts[position]} ")
+
+        })
     }
 
     override fun getItemCount(): Int {

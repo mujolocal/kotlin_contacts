@@ -29,10 +29,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         listContactsFragment.toCrud.observe(this){
-            if(it){
+            if(it.toCrud){
                 supportFragmentManager.beginTransaction().replace(binding.fragmentContainer.id,crudFragment ).commit()
             }
         }
+
 
 
     }
