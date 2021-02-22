@@ -8,16 +8,27 @@ import com.example.contacts.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    var listContactsFragment =  ListContactsFragment()
+    var crudFragment = CrudFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.txtview.text = "the binding is complete"
+
         if(savedInstanceState == null){
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add(binding.fragmentContainer.id,ListContactsFragment())
+                add(binding.fragmentContainer.id,listContactsFragment)
             }
         }
+        listContactsFragment.toCrud.observe(this){
+            if(it){
+                supportFragmentManager.beginTransaction().replace(binding.fragmentContainer.id,crudFragment ).commit()
+            }
+        }
+
+
     }
 }
