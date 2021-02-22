@@ -9,8 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contacts.R
 import com.example.contacts.model.ContactModel
+import com.example.contacts.model.PagePackage
+import com.example.contacts.view.ListContactsFragment
+import com.example.contacts.viewModel.ListContactsViewModel
 
-class ListContactRecycleViewAdapter(var contacts: List<ContactModel>): RecyclerView.Adapter<ListContactRecycleViewAdapter.ViewHolder>() {
+class ListContactRecycleViewAdapter(var contacts: List<ContactModel>, val listContactsFragment: ListContactsFragment): RecyclerView.Adapter<ListContactRecycleViewAdapter.ViewHolder>() {
     private  val TAG = "ListContactRecycleViewA"
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val fName: TextView
@@ -35,10 +38,10 @@ class ListContactRecycleViewAdapter(var contacts: List<ContactModel>): RecyclerV
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.lName.text = contacts[position].lName
         holder.fName.text = contacts[position].fName
-        holder.itemView.setOnClickListener({
+        holder.itemView.setOnClickListener {
             Log.d(TAG, "onBindViewHolder: ${contacts[position]} ")
-
-        })
+            listContactsFragment._toCrud.postValue(PagePackage(true, contacts[position]))
+        }
     }
 
     override fun getItemCount(): Int {

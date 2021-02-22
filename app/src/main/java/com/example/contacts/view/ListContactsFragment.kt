@@ -22,7 +22,7 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
     lateinit var binding: FragmentListContactsBinding
     var contacts = listOf<ContactModel>()
     val listContactsViewModel = ListContactsViewModel()
-    private val _toCrud = MutableLiveData<PagePackage>()
+    val _toCrud = MutableLiveData<PagePackage>()
     val toCrud : LiveData<PagePackage>
         get() = _toCrud
 
@@ -51,7 +51,7 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
         val layoutManager = LinearLayoutManager(binding.root.context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = layoutManager
-        val listConstactRecyclerViewAdapter = ListContactRecycleViewAdapter(contacts)
+        val listConstactRecyclerViewAdapter = ListContactRecycleViewAdapter(contacts, this)
         recyclerView.adapter = listConstactRecyclerViewAdapter
     }
 
