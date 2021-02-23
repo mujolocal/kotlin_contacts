@@ -6,7 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.example.contacts.R
 import com.example.contacts.databinding.FragmentCrudBinding
 import com.example.contacts.model.Address
@@ -28,16 +31,17 @@ class CrudFragment: Fragment(R.layout.fragment_crud) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCrudBinding.inflate(layoutInflater)
-
-        val savedContactModel = arguments?.getSerializable(CONTACT_KEY) as ContactModel?
+        (activity as MainActivity).findViewById<Toolbar>(R.id.my_toolbar).title = "Creations school"
+        val savedContactModel = null
         if (savedContactModel != null){
-            Log.d(TAG, "onCreateView: ${savedContactModel::class.simpleName}")
-            binding.crudFnameIv.setText( savedContactModel.fName )
-            binding.crudLnameIv.setText(savedContactModel.lName)
-            binding.crudStreetIv.setText(savedContactModel.ADDRESS)
-            binding.crudPhoneIv.setText(savedContactModel.phone)
-            binding.crudEmailIv.setText(savedContactModel.email)
-            binding.commitBtn.text = "Update Contact"
+
+            Log.d(TAG, "onCreateView: no null")
+//            binding.crudFnameIv.setText( savedContactModel.fName )
+//            binding.crudLnameIv.setText(savedContactModel.lName)
+//            binding.crudStreetIv.setText(savedContactModel.ADDRESS)
+//            binding.crudPhoneIv.setText(savedContactModel.phone)
+//            binding.crudEmailIv.setText(savedContactModel.email)
+//            binding.commitBtn.text = "Update Contact"
 
             
         }
@@ -57,6 +61,8 @@ class CrudFragment: Fragment(R.layout.fragment_crud) {
             }else {
                 crudViewModel.insertInto(binding.root.context, contactModel)
                 Log.d(TAG, "onCreateView: $contactModel ")
+                val fm = this.findNavController()
+                fm.popBackStack()
             }
         }
 

@@ -111,5 +111,5 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha07"
 
-
+    implementation "com.android.support:support-core-utils:28.0.0"
 }

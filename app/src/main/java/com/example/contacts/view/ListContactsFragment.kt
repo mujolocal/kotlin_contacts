@@ -2,9 +2,8 @@ package com.example.contacts.view
 
 import android.os.Binder
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -34,11 +33,13 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListContactsBinding.inflate(layoutInflater)
+
          listContactsViewModel.contactModels.observe(viewLifecycleOwner){
             contacts = it
              setupRecycler()
         }
         listContactsViewModel.getList(binding.root.context)
+        (activity as MainActivity).findViewById<Toolbar>(R.id.my_toolbar).title = "running wild"
 
         binding.btnAddContat.setOnClickListener {
 //            _toCrud.value = PagePackage(true,null)
@@ -49,6 +50,8 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
 
         return binding.root
     }
+
+
     fun setupRecycler(){
         recyclerView = binding.listContactRecycleView
         val layoutManager = LinearLayoutManager(binding.root.context)
