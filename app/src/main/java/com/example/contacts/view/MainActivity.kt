@@ -28,23 +28,23 @@ class MainActivity : AppCompatActivity() {
         if(savedInstanceState == null){
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add(binding.fragmentContainer.id,listContactsFragment)
+//                add(binding.fragmentContainer.id,listContactsFragment)
             }
         }
-        listContactsFragment.toCrud.observe(this){
-            if(it.toCrud and (it.contactModel == null)){
-                supportFragmentManager.beginTransaction().replace(binding.fragmentContainer.id,crudFragment ).commit()
-            }else if (it.toCrud and (it.contactModel != null)){
+//        listContactsFragment.toCrud.observe(this){
+//            if(it.toCrud and (it.contactModel == null)){
 //                supportFragmentManager.beginTransaction().replace(binding.fragmentContainer.id,crudFragment ).commit()
-                val bundle = Bundle()
-                bundle.putSerializable(CONTACT_KEY,it.contactModel)
-                crudFragment.arguments = bundle
-                Log.d(TAG, "onCreate: ${it.contactModel}")
-                supportFragmentManager.beginTransaction().replace(binding.fragmentContainer.id,crudFragment ).commit()
-            }
+//            }else if (it.toCrud and (it.contactModel != null)){
+////                supportFragmentManager.beginTransaction().replace(binding.fragmentContainer.id,crudFragment ).commit()
+//                val bundle = Bundle()
+//                bundle.putSerializable(CONTACT_KEY,it.contactModel)
+//                crudFragment.arguments = bundle
+//                Log.d(TAG, "onCreate: ${it.contactModel}")
+//                supportFragmentManager.beginTransaction().replace(binding.fragmentContainer.id,crudFragment ).commit()
+//            }
         }
 
 
 
-    }
+//    }
 }

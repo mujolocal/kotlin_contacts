@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contacts.R
@@ -40,7 +42,8 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
 
         binding.btnAddContat.setOnClickListener {
 //            _toCrud.value = PagePackage(true,null)
-
+            val action = ListContactsFragmentDirections.actionListContactsFragmentToCrudFragment()
+            this.findNavController().navigate(action)
         }
 
 

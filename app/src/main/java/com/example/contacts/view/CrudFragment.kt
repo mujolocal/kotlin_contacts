@@ -30,14 +30,15 @@ class CrudFragment: Fragment(R.layout.fragment_crud) {
         binding = FragmentCrudBinding.inflate(layoutInflater)
 
         val savedContactModel = arguments?.getSerializable(CONTACT_KEY) as ContactModel?
-        Log.d(TAG, "onCreateView: ")
         if (savedContactModel != null){
+            Log.d(TAG, "onCreateView: ${savedContactModel::class.simpleName}")
             binding.crudFnameIv.setText( savedContactModel.fName )
             binding.crudLnameIv.setText(savedContactModel.lName)
             binding.crudStreetIv.setText(savedContactModel.ADDRESS)
             binding.crudPhoneIv.setText(savedContactModel.phone)
             binding.crudEmailIv.setText(savedContactModel.email)
             binding.commitBtn.text = "Update Contact"
+
             
         }
 
