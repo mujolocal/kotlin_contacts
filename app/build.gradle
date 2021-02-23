@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        def nav_version = "2.3.3"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+    }
+}
+
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -5,6 +16,8 @@ plugins {
     id 'kotlin-parcelize'
 
 }
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 repositories {
     google()
     jcenter()
@@ -97,4 +110,6 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha07"
+
+
 }
