@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.contacts.R
 import com.example.contacts.databinding.FragmentCrudBinding
 import com.example.contacts.model.Address
@@ -20,6 +21,8 @@ import com.example.contacts.viewModel.CrudViewModel
 import kotlinx.coroutines.Dispatchers
 
 class CrudFragment: Fragment(R.layout.fragment_crud) {
+    val args: CrudFragmentArgs by navArgs()
+
     private val TAG = "CrudFragment"
     private val CONTACT_KEY = "contact_key"
     lateinit var binding: FragmentCrudBinding
@@ -31,17 +34,18 @@ class CrudFragment: Fragment(R.layout.fragment_crud) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCrudBinding.inflate(layoutInflater)
+        val savedContact = args.contact
         (activity as MainActivity).findViewById<Toolbar>(R.id.my_toolbar).title = "Creations school"
-        val savedContactModel = null
-        if (savedContactModel != null){
+
+        if (savedContact != null){
 
             Log.d(TAG, "onCreateView: no null")
-//            binding.crudFnameIv.setText( savedContactModel.fName )
-//            binding.crudLnameIv.setText(savedContactModel.lName)
-//            binding.crudStreetIv.setText(savedContactModel.ADDRESS)
-//            binding.crudPhoneIv.setText(savedContactModel.phone)
-//            binding.crudEmailIv.setText(savedContactModel.email)
-//            binding.commitBtn.text = "Update Contact"
+            binding.crudFnameIv.setText( savedContact.fName )
+            binding.crudLnameIv.setText(savedContact.lName)
+            binding.crudStreetIv.setText(savedContact.ADDRESS)
+            binding.crudPhoneIv.setText(savedContact.phone)
+            binding.crudEmailIv.setText(savedContact.email)
+            binding.commitBtn.text = "Update Contact"
 
             
         }
@@ -55,15 +59,15 @@ class CrudFragment: Fragment(R.layout.fragment_crud) {
                 binding.crudPhoneIv.text.toString(),
                 binding.crudEmailIv.text.toString()
             )
-            if (savedContactModel != null){
+            if (savedContact != null){
                 crudViewModel.update(binding.root.context,contactModel)
                 Log.d(TAG, "onCreateView: updated")
             }else {
                 crudViewModel.insertInto(binding.root.context, contactModel)
                 Log.d(TAG, "onCreateView: $contactModel ")
-                val fm = this.findNavController()
-                fm.popBackStack()
             }
+            val fm = this.findNavController()
+            fm.popBackStack()
         }
 
 
