@@ -39,7 +39,7 @@ class ListContactsFragment: Fragment(R.layout.fragment_list_contacts) {
         listContactsViewModel.getList(binding.root.context)
 
         binding.btnAddContat.setOnClickListener {
-            _toCrud.value = PagePackage(true,null)
+//            _toCrud.value = PagePackage(true,null)
 
         }
 
